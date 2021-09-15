@@ -1,9 +1,0 @@
-> git clone https://github.com/rilder-almeida/starter_python_project.git
-> rm -rf .git
-> git init
-> mv starter_python_project [your_project_name]
-> cd your_project_name/
-> virtualenv -p python3 venv
-> . venv/bin/activate
-> venv/bin/pip3 install -r requirements.txt
-> pre-commit install
