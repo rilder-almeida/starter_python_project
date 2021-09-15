@@ -28,7 +28,7 @@ if [ ! -z "$missing_pkgs" ]; then
 	while true; do
     read -p "${red}Missing package: $missing_pkgs, confirm to install (y/n)${white}" yn
     case $yn in
-        [Yy]* ) sudo apt install $missing_pkgs && echo "${green}Installed${white}"; break || ( echo "${red}Failed${white}!" && echo "${red}Exiting${white}" && exit 1 );;
+        [Yy]* ) sudo apt install $missing_pkgs && echo "${green}Installed${white}"; break || ( echo "${red}Failed${white}!" && echo "${red}Exiting${white}" && exit 0);;
         [Nn]* ) exit;;
         * ) echo "${red}Please answer yes or no.${white}";;
     esac
@@ -44,15 +44,23 @@ elif [ -d "$project" ]; then
 elif [ -d "starter_python_project" ]; then
 	echo "${red}starter_python_project repository already exist.${white}"; echo "${red}Exiting${white}"; exit 1
 else
-	echo "${yellow}Repository: https://github.com/rilder-almeida/starter_python_project.git${white}" && git clone https://github.com/rilder-almeida/starter_python_project.git || ( echo "${red}Failed${white}!" && rm -rf starter_python_project; echo "${red}Exiting${white}"; exit 1 )
+	echo "${yellow}Repository: https://github.com/rilder-almeida/starter_python_project.git${white}"
+	git clone https://github.com/rilder-almeida/starter_python_project.git || ( echo "${red}Failed${white}!" && rm -rf starter_python_project; echo "${red}Exiting${white}"; exit 0)
+	
 	echo "${yellow}Creating project folder${white}"
-	mv starter_python_project "$project" && echo "${green}Done!${white}" || ( echo "${red}Failed${white}!" && rm -rf starter_python_project; echo "${red}Exiting${white}"; exit 1 )
+	mv starter_python_project "$project" && echo "${green}Done!${white}" || ( echo "${red}Failed${white}!" && rm -rf starter_python_project; echo "${red}Exiting${white}"; exit 0)
+	
 	echo "${yellow}Cleaning repository git${white}"
-	cd "$project" && rm -rf .git && echo "${green}Done!${white}" || ( echo "${red}Failed${white}!" && rm -rf "$project"; echo "${red}Exiting${white}"; exit 1 )
-	echo "${yellow}Initiating Virtual Environment, installing requirements and pre-commit${white}"
-	virtualenv -p python3 venv && . venv/bin/activate && venv/bin/pip3 install -r requirements.txt && pre-commit install && echo "${green}Done!${white}" || ( echo "${red}Failed${white}!" && rm -rf "$project"; echo "${red}Exiting${white}"; exit 1 )
+	cd "$project" && rm -rf .git && echo "${green}Done!${white}" || ( cd .. && rm -rf starter_python_project; echo "${red}Exiting${white}"; exit 1)
+	
+	echo "${yellow}Setting README.MD${white}"
+	rm -rf README.md && mv readme_template.md README.MD && echo "${green}Done!${white}" || ( cd .. && rm -rf starter_python_project; echo "${red}Exiting${white}"; exit 1)
+	
 	echo "${yellow}Initiating git, adding and commiting the repository${white}"
-	git init && git add . && git commit -m "Initial configs" && echo "${green}Done!${white}" || ( echo "${red}Failed${white}!" && rm -rf "$project"; echo "${red}Exiting${white}"; exit 1 )
+	git init && git add . && git commit -m "Initial configs" && echo "${green}Done!${white}" || ( cd .. && rm -rf starter_python_project; echo "${red}Exiting${white}"; exit 1)
+	
+	echo "${yellow}Initiating Virtual Environment, installing requirements and pre-commit${white}"
+	virtualenv -p python3 venv && . venv/bin/activate && venv/bin/pip3 install -r requirements.txt && pre-commit install && echo "${green}Done!${white}" || ( cd .. && rm -rf starter_python_project; echo "${red}Exiting${white}"; exit 1)
 fi
 
 echo "${yellow}Successful! Enjoy your python project "$project" with good pratices!${white}"
