@@ -51,18 +51,18 @@ else
 	mv starter_python_project "$project" && echo "${green}Done!${white}" || ( echo "${red}Failed${white}!"; rm -rf starter_python_project; echo "${red}Exiting${white}"; exit 1)
 	
 	echo "${yellow}Cleaning repository git${white}"
-	cd "$project" && rm -rf .git && rm -rf README.md && rm -rf starter_python_project.sh && echo "${green}Done!${white}" || ( cd .. && rm -rf starter_python_project; echo "${red}Exiting${white}"; exit 1)
+	cd "$project" && rm -rf .git && rm -rf README.md && rm -rf starter_python_project.sh && echo "${green}Done!${white}" || ( cd ..; rm -rf starter_python_project; echo "${red}Exiting${white}"; exit 1)
 	
 	echo "${yellow}Setting README.MD${white}"
-	mv readme_template.md README.MD && echo "${green}Done!${white}" || ( cd .. && rm -rf starter_python_project; echo "${red}Exiting${white}"; exit 1)
+	mv readme_template.md README.MD && echo "${green}Done!${white}" || ( cd ..; rm -rf starter_python_project; echo "${red}Exiting${white}"; exit 1)
 	
 	echo "${yellow}Initiating git, adding and commiting the repository${white}"
-	git init && git add . && git commit -m "Initial configs" && echo "${green}Done!${white}" || ( cd .. && rm -rf starter_python_project; echo "${red}Exiting${white}"; exit 1)
+	git init && git add . && git commit -m "Initial configs" && echo "${green}Done!${white}" || ( cd ..; rm -rf starter_python_project; echo "${red}Exiting${white}"; exit 1)
 	
 	echo "${yellow}Initiating Virtual Environment, installing requirements and pre-commit${white}"
-	virtualenv -p python3 venv && . venv/bin/activate && venv/bin/pip3 install -r requirements.txt && pre-commit install && echo "${green}Done!${white}" || ( cd .. && rm -rf starter_python_project; echo "${red}Exiting${white}"; exit 1)
+	virtualenv -p python3 venv && . venv/bin/activate && venv/bin/pip3 install -r requirements.txt && pre-commit install && echo "${green}Done!${white}" || ( cd ..; rm -rf starter_python_project; echo "${red}Exiting${white}"; exit 1)
 fi
 
-echo "${yellow}Successful!${white}"
-echo "${yellow}Remember to associate the python3 of created virtual environment as the project's interpreter!${white}"
-echo "${yellow}Enjoy your python project "$project" with good pratices!${white}"
+echo "${green}Successful!${white}"
+echo "${yellow}Remember to associate the created virtual environment to project's interpreter!${white}"
+echo "${blue}Enjoy your python project "$project" with good pratices!${white}"
