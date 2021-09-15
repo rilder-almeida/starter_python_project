@@ -64,5 +64,5 @@ else
 fi
 
 echo "${yellow}Successful!${white}"
-echo "${yellow}Remember to associate the virtual environment as the interpreter project!${white}"
+echo "${yellow}Remember to associate the python3 of created virtual environment as the project's interpreter!${white}"
 echo "${yellow}Enjoy your python project "$project" with good pratices!${white}"
