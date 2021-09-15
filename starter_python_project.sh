@@ -59,7 +59,7 @@ else
 	git init && git add . && git commit -m "Initial configs" && echo "${green}Done!${white}" || { cd ..; rm -rf "$project"; echo "${red}Exiting${white}"; exit 1; }
 	
 	echo "${yellow}Initiating Virtual Environment and installing all requirements${white}"
-	virtualenv -p python3 venv && . venv/bin/activate && sed -i 's/==/>=/g' requirements.txt && venv/bin/pip3 install -r requirements.txt --upgrade && pre-commit install && echo "${green}Done!${white}" || { cd ..; rm -rf "$project"; echo "${red}Exiting${white}"; exit 1; }
+	virtualenv -p python3 venv && . venv/bin/activate && venv/bin/pip3 install -r requirements.txt --upgrade && pre-commit install && echo "${green}Done!${white}" || { cd ..; rm -rf "$project"; echo "${red}Exiting${white}"; exit 1; }
 fi
 
 echo "${green}All Successful!${white}"
