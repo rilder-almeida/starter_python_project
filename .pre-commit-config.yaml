@@ -15,7 +15,7 @@ repos:
     - id: pytest
       name: pytest
       language: system
-      entry: pytest -vx
+      entry: pytest -vx --ff --nf
       always_run: true
       pass_filenames: false
       stages: [commit]
