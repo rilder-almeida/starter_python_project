@@ -45,10 +45,10 @@ elif [ -d "starter_python_project" ]; then
 	echo "${red}starter_python_project repository already exist.${white}"; echo "${red}Exiting${white}"; exit 1
 else
 	echo "${yellow}Repository: https://github.com/rilder-almeida/starter_python_project.git${white}"
-	git clone https://github.com/rilder-almeida/starter_python_project.git || ( echo "${red}Failed${white}!" && rm -rf starter_python_project; echo "${red}Exiting${white}"; exit 0)
+	git clone https://github.com/rilder-almeida/starter_python_project.git || ( echo "${red}Failed${white}!" && rm -rf starter_python_project; echo "${red}Exiting${white}"; exit 1)
 	
 	echo "${yellow}Creating project folder${white}"
-	mv starter_python_project "$project" && echo "${green}Done!${white}" || ( echo "${red}Failed${white}!" && rm -rf starter_python_project; echo "${red}Exiting${white}"; exit 0)
+	mv starter_python_project "$project" && echo "${green}Done!${white}" || ( echo "${red}Failed${white}!" && rm -rf starter_python_project; echo "${red}Exiting${white}"; exit 1)
 	
 	echo "${yellow}Cleaning repository git${white}"
 	cd "$project" && rm -rf .git && echo "${green}Done!${white}" || ( cd .. && rm -rf starter_python_project; echo "${red}Exiting${white}"; exit 1)
