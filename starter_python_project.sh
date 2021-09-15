@@ -63,4 +63,6 @@ else
 	virtualenv -p python3 venv && . venv/bin/activate && venv/bin/pip3 install -r requirements.txt && pre-commit install && echo "${green}Done!${white}" || ( cd .. && rm -rf starter_python_project; echo "${red}Exiting${white}"; exit 1)
 fi
 
-echo "${yellow}Successful! Enjoy your python project "$project" with good pratices!${white}"
+echo "${yellow}Successful!${white}"
+echo "${yellow}Remember to associate the virtual environment as the interpreter project!${white}"
+echo "${yellow}Enjoy your python project "$project" with good pratices!${white}"
