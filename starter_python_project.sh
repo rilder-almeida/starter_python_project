@@ -28,7 +28,7 @@ if [ ! -z "$missing_pkgs" ]; then
 	while true; do
 	    read -p "${red}Missing package: $missing_pkgs, confirm to install (y/n)${white}" yn
 	    case $yn in
-		[Yy]* ) sudo apt install $missing_pkgs && echo "${green}Installed${white}"; break || ( echo "${red}Failed${white}!" && echo "${red}Exiting${white}" && exit; );;
+		[Yy]* ) sudo apt install $missing_pkgs && echo "${green}Installed${white}"; break || { echo "${red}Failed${white}!" && echo "${red}Exiting${white}" && exit; };;
 		[Nn]* ) exit;;
 		* ) echo "${red}Please answer yes or no.${white}";;
 	    esac
