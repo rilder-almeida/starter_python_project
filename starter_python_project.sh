@@ -12,7 +12,7 @@ echo "${yellow}Welcome to Starter Python Project${white}"
 echo "${yellow}by Rilder Almeida - ${blue}https://www.linkedin.com/in/rilder-almeida/${white}"
 
 installed() {
-    return $(dpkg-query -W -f '${Status}\n' "${1}" 2>&1|awk '/ok installed/{print 0;exit}{print 1}')
+    return $(dpkg-query -W -f '${Status}\n' "${1}" 2>&1|awk '/ok installed/{print 0;exit}{print 1}'
 }
 
 pkgs=(python3-pip git virtualenv)
